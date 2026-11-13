@@ -1,0 +1,38 @@
+[
+  {
+    "timestamp": "2026-11-13T12:05:01.000Z",
+    "app": "sshd",
+    "message": "sshd[12500]: Accepted publickey for ubuntu from 10.0.1.15 port 44320 ssh2",
+    "user": "ubuntu",
+    "source_ip": "10.0.1.15",
+    "port": "44320",
+    "event": "Accepted publickey"
+  },
+  {
+    "timestamp": "2026-11-13T12:06:12.000Z",
+    "app": "sshd",
+    "message": "sshd[12510]: Failed password for nagios from 127.0.0.1 port 59910 ssh2",
+    "user": "nagios",
+    "source_ip": "127.0.0.1",
+    "port": "59910",
+    "event": "Failed password"
+  },
+  {
+    "timestamp": "2026-11-13T12:07:33.000Z",
+    "app": "sshd",
+    "message": "sshd[12520]: Connection closed by 10.0.1.15 port 44320 [preauth]",
+    "user": "",
+    "source_ip": "10.0.1.15",
+    "port": "44320",
+    "event": "Connection closed"
+  },
+  {
+    "timestamp": "2026-11-13T12:08:44.000Z",
+    "app": "sshd",
+    "message": "sshd[12530]: Accepted password for devops from 10.0.2.55 port 36720 ssh2",
+    "user": "devops",
+    "source_ip": "10.0.2.55",
+    "port": "36720",
+    "event": "Accepted password"
+  }
+]

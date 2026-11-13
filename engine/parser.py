@@ -133,3 +133,74 @@ def normalize_linux_sudo_event(raw_event: Dict[str, Any]) -> Dict[str, Any]:
         "timestamp": raw_event.get("timestamp", "")
     }
 
+
+def normalize_linux_ssh_event(raw_event: Dict[str, Any]) -> Dict[str, Any]:
+    """
+    Normalizes Linux sshd authentication events from /var/log/auth.log or journalctl.
+    Handles failed passwords, invalid users, successful authentications, and disconnections.
+    """
+    message = raw_event.get("message", "")
+    app = raw_event.get("app", "sshd")
+    event_type = raw_event.get("event", "")
+    user = raw_event.get("user", "")
+    source_ip = raw_event.get("source_ip", "")
+    port = str(raw_event.get("port", ""))
+
+    # If syslog message format is provided, parse via regex
+    if message and not event_type:
+        # Example 1: Failed password for invalid user admin from 192.168.1.150 port 54822 ssh2
+        m_failed_inv = re.search(
+            r"Failed password for invalid user\s+([^\s]+)\s+from\s+([^\s]+)\s+port\s+(\d+)",
+            message
+        )
+        if m_failed_inv:
+            event_type = "Failed password"
+            user = m_failed_inv.group(1)
+            source_ip = m_failed_inv.group(2)
+            port = m_failed_inv.group(3)
+        else:
+            # Example 2: Failed password for root from 192.168.1.150 port 54822 ssh2
+            m_failed = re.search(
+                r"Failed password for\s+([^\s]+)\s+from\s+([^\s]+)\s+port\s+(\d+)",
+                message
+            )
+            if m_failed:
+                event_type = "Failed password"
+                user = m_failed.group(1)
+                source_ip = m_failed.group(2)
+                port = m_failed.group(3)
+            else:
+                # Example 3: Invalid user guest from 172.16.5.22 port 50100
+                m_inv = re.search(
+                    r"Invalid user\s+([^\s]+)\s+from\s+([^\s]+)\s+port\s+(\d+)",
+                    message
+                )
+                if m_inv:
+                    event_type = "Invalid user"
+                    user = m_inv.group(1)
+                    source_ip = m_inv.group(2)
+                    port = m_inv.group(3)
+                else:
+                    # Example 4: Accepted publickey for ubuntu from 10.0.1.5 port 43100
+                    m_acc = re.search(
+                        r"Accepted\s+([^\s]+)\s+for\s+([^\s]+)\s+from\s+([^\s]+)\s+port\s+(\d+)",
+                        message
+                    )
+                    if m_acc:
+                        event_type = f"Accepted {m_acc.group(1)}"
+                        user = m_acc.group(2)
+                        source_ip = m_acc.group(3)
+                        port = m_acc.group(4)
+
+    return {
+        "log_type": "linux_auth",
+        "facility": "auth",
+        "app": app,
+        "Event": event_type,
+        "User": user,
+        "SourceIp": source_ip,
+        "Port": port,
+        "Message": message,
+        "timestamp": raw_event.get("timestamp", "")
+    }
+
