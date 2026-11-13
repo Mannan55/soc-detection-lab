@@ -1,0 +1,56 @@
+[
+  {
+    "stage": 1,
+    "phase_name": "SSH Brute Force",
+    "event_type": "linux_ssh",
+    "event": {
+      "timestamp": "2026-11-13T16:00:10.000Z",
+      "app": "sshd",
+      "message": "sshd[22100]: Failed password for root from 198.51.100.20 port 44120 ssh2",
+      "user": "root",
+      "source_ip": "198.51.100.20",
+      "port": "44120",
+      "event": "Failed password"
+    }
+  },
+  {
+    "stage": 2,
+    "phase_name": "SSH Invalid User Enumeration",
+    "event_type": "linux_ssh",
+    "event": {
+      "timestamp": "2026-11-13T16:00:22.000Z",
+      "app": "sshd",
+      "message": "sshd[22105]: Failed password for invalid user admin from 198.51.100.20 port 44122 ssh2",
+      "user": "admin",
+      "source_ip": "198.51.100.20",
+      "port": "44122",
+      "event": "Failed password for invalid user"
+    }
+  },
+  {
+    "stage": 3,
+    "phase_name": "Privilege Escalation via Sudo Abuse",
+    "event_type": "linux_sudo",
+    "event": {
+      "timestamp": "2026-11-13T16:05:45.000Z",
+      "user": "webdev",
+      "target_user": "root",
+      "command": "/usr/bin/find . -exec /bin/sh \\; -quit",
+      "pwd": "/var/www/html",
+      "message": "sudo:   webdev : TTY=pts/1 ; PWD=/var/www/html ; USER=root ; COMMAND=/usr/bin/find . -exec /bin/sh \\; -quit"
+    }
+  },
+  {
+    "stage": 4,
+    "phase_name": "Benign Administrative Update",
+    "event_type": "linux_sudo",
+    "event": {
+      "timestamp": "2026-11-13T16:15:00.000Z",
+      "user": "sysadmin",
+      "target_user": "root",
+      "command": "/usr/bin/apt-get update",
+      "pwd": "/home/sysadmin",
+      "message": "sudo: sysadmin : TTY=pts/0 ; PWD=/home/sysadmin ; USER=root ; COMMAND=/usr/bin/apt-get update"
+    }
+  }
+]
