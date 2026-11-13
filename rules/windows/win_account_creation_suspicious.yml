@@ -1,0 +1,34 @@
+title: Suspicious Local or Domain Account Creation
+id: b4a2c918-1e5f-4a3d-8210-9f5b3c4d7e21
+status: test
+description: Detects the creation of local or domain user accounts (Event ID 4720), filtering authorized enterprise provisioning systems and machine-managed service accounts.
+references:
+  - https://attack.mitre.org/techniques/T1136/
+  - https://attack.mitre.org/techniques/T1136/001/
+  - https://attack.mitre.org/techniques/T1136/002/
+author: Mannan Shah
+date: 2026-11-13
+modified: 2026-11-13
+tags:
+  - attack.persistence
+  - attack.t1136
+  - attack.t1136.001
+  - attack.t1136.002
+logsource:
+  product: windows
+  service: security
+detection:
+  selection:
+    event_id: "4720"
+  filter_service_engine:
+    SubjectUserName|endswith: "$"
+  filter_provisioner:
+    SubjectUserName:
+      - MSOL_ServiceAccount
+      - AzureADConnect
+      - SCCM_DeployService
+  condition: selection and not 1 of filter*
+falsepositives:
+  - Authorized human resources and IT onboarding tickets
+  - Automated directory synchronization agents
+level: medium
