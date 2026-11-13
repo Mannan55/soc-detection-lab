@@ -1,0 +1,38 @@
+[
+  {
+    "EventID": 4720,
+    "TimeCreated": "2026-11-13T13:10:00.000Z",
+    "EventData": {
+      "TargetUserName": "new_hire_dev",
+      "TargetSid": "S-1-5-21-3456789012-1234567890-9876543210-1020",
+      "SubjectUserName": "AzureADConnect",
+      "SubjectUserSid": "S-1-5-21-3456789012-1234567890-9876543210-999",
+      "SubjectDomainName": "CORP",
+      "PrivilegeList": "-"
+    }
+  },
+  {
+    "EventID": 4720,
+    "TimeCreated": "2026-11-13T13:11:15.000Z",
+    "EventData": {
+      "TargetUserName": "app_pool_user",
+      "TargetSid": "S-1-5-21-3456789012-1234567890-9876543210-1021",
+      "SubjectUserName": "DC-PRIMARY$",
+      "SubjectUserSid": "S-1-5-18",
+      "SubjectDomainName": "CORP",
+      "PrivilegeList": "-"
+    }
+  },
+  {
+    "EventID": 4720,
+    "TimeCreated": "2026-11-13T13:12:30.000Z",
+    "EventData": {
+      "TargetUserName": "endpoint_client",
+      "TargetSid": "S-1-5-21-3456789012-1234567890-9876543210-1022",
+      "SubjectUserName": "SCCM_DeployService",
+      "SubjectUserSid": "S-1-5-21-3456789012-1234567890-9876543210-998",
+      "SubjectDomainName": "CORP",
+      "PrivilegeList": "-"
+    }
+  }
+]

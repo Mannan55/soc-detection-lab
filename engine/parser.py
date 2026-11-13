@@ -204,3 +204,44 @@ def normalize_linux_ssh_event(raw_event: Dict[str, Any]) -> Dict[str, Any]:
         "timestamp": raw_event.get("timestamp", "")
     }
 
+
+def normalize_windows_account_creation(raw_event: Dict[str, Any]) -> Dict[str, Any]:
+    """
+    Normalizes Windows Security Event 4720 (A user account was created).
+    Extracts created account details, creator credentials, and domain context.
+    """
+    event_data = raw_event.get("EventData", raw_event)
+
+    target_user_name = (
+        event_data.get("TargetUserName")
+        or event_data.get("TargetUser")
+        or event_data.get("SamAccountName")
+        or ""
+    )
+    target_sid = event_data.get("TargetSid") or ""
+    subject_user_name = (
+        event_data.get("SubjectUserName")
+        or event_data.get("SubjectUser")
+        or event_data.get("CreatorUser")
+        or ""
+    )
+    subject_user_sid = event_data.get("SubjectUserSid") or ""
+    subject_domain_name = (
+        event_data.get("SubjectDomainName")
+        or event_data.get("SubjectDomain")
+        or ""
+    )
+    privilege_list = event_data.get("PrivilegeList") or ""
+
+    return {
+        "event_id": str(raw_event.get("EventID", 4720)),
+        "channel": "Security",
+        "TargetUserName": target_user_name,
+        "TargetSid": target_sid,
+        "SubjectUserName": subject_user_name,
+        "SubjectUserSid": subject_user_sid,
+        "SubjectDomainName": subject_domain_name,
+        "PrivilegeList": privilege_list,
+        "timestamp": raw_event.get("TimeCreated", "")
+    }
+
