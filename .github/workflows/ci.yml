@@ -44,3 +44,7 @@ jobs:
         run: |
           pytest -v
 
+      - name: Verify Detection Quality Report Conformance
+        run: |
+          python scripts/generate_detection_metrics.py --check
+
