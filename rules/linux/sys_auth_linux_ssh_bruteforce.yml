@@ -1,0 +1,33 @@
+title: Potential Linux SSH Authentication Brute-Force or Dictionary Attack
+id: e3a1f82b-9c4d-4b82-95f3-7801a2d59642
+status: test
+description: Detects failed SSH authentication attempts, invalid user queries, and credential stuffing targeting Linux hosts, while filtering trusted internal loopback connections.
+references:
+  - https://attack.mitre.org/techniques/T1110/
+  - https://attack.mitre.org/techniques/T1110/001/
+  - https://attack.mitre.org/techniques/T1021/004/
+author: Mannan Shah
+date: 2026-11-13
+modified: 2026-11-13
+tags:
+  - attack.credential_access
+  - attack.t1110
+  - attack.t1110.001
+  - attack.lateral_movement
+  - attack.t1021.004
+logsource:
+  product: linux
+  service: sshd
+detection:
+  selection:
+    app: sshd
+    Event|contains:
+      - Failed password
+      - Invalid user
+  filter_internal_loopback:
+    SourceIp: 127.0.0.1
+  condition: selection and not 1 of filter*
+falsepositives:
+  - System administrators with mistyped passwords
+  - Automated deployment orchestrators with misconfigured SSH keys
+level: high
