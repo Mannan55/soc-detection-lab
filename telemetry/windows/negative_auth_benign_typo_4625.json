@@ -1,0 +1,54 @@
+[
+  {
+    "EventID": 4625,
+    "TimeCreated": "2026-11-13T11:10:01.000Z",
+    "EventData": {
+      "TargetUserName": "WKSTN-FIN-04$",
+      "WorkstationName": "WKSTN-FIN-04",
+      "IpAddress": "192.168.1.80",
+      "LogonType": "3",
+      "Status": "0xC000006D",
+      "SubStatus": "0xC000006A",
+      "FailureReason": "Machine account trust relationship issue."
+    }
+  },
+  {
+    "EventID": 4625,
+    "TimeCreated": "2026-11-13T11:11:14.000Z",
+    "EventData": {
+      "TargetUserName": "ANONYMOUS LOGON",
+      "WorkstationName": "DC-PRIMARY",
+      "IpAddress": "127.0.0.1",
+      "LogonType": "3",
+      "Status": "0xC000006D",
+      "SubStatus": "0xC000006A",
+      "FailureReason": "Anonymous network access denial."
+    }
+  },
+  {
+    "EventID": 4625,
+    "TimeCreated": "2026-11-13T11:12:45.000Z",
+    "EventData": {
+      "TargetUserName": "alice.turner",
+      "WorkstationName": "DESKTOP-ATURNER",
+      "IpAddress": "127.0.0.1",
+      "LogonType": "2",
+      "Status": "0xC000006D",
+      "SubStatus": "0xC000006A",
+      "FailureReason": "User password typo on local physical keyboard."
+    }
+  },
+  {
+    "EventID": 4625,
+    "TimeCreated": "2026-11-13T11:14:02.000Z",
+    "EventData": {
+      "TargetUserName": "bob.vance",
+      "WorkstationName": "DESKTOP-BVANCE",
+      "IpAddress": "127.0.0.1",
+      "LogonType": "2",
+      "Status": "0xC000006D",
+      "SubStatus": "0xC0000234",
+      "FailureReason": "User account currently locked out."
+    }
+  }
+]
