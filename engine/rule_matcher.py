@@ -6,8 +6,25 @@ Strictly zero em dashes (U+2014).
 """
 
 import os
+import re
 import yaml
 from typing import Dict, Any, List, Optional, Tuple
+
+
+def deobfuscate_string(val: str) -> str:
+    """
+    Normalizes command lines and strings against common evasion techniques:
+    - Removes caret (^) command-prompt escape characters
+    - Removes PowerShell backtick escape characters
+    - Collapses consecutive whitespace (spaces, tabs) into single spaces
+    """
+    if not val or not isinstance(val, str):
+        return ""
+    # Strip caret and backtick evasion
+    cleaned = val.replace("^", "").replace("`", "")
+    # Normalize excessive spacing
+    cleaned = re.sub(r"\s+", " ", cleaned).strip()
+    return cleaned
 
 
 class SigmaRule:
@@ -30,22 +47,22 @@ class SigmaRule:
         if event_val is None:
             return False
 
-        event_str = str(event_val).lower()
-
         # If target_val is a list, match ANY value (OR condition)
         if isinstance(target_val, list):
             return any(self._match_field_value(event_val, item, modifier) for item in target_val)
 
+        event_str = str(event_val).lower()
         target_str = str(target_val).lower()
+        deobf_event_str = deobfuscate_string(event_str)
 
         if modifier == "contains":
-            return target_str in event_str
+            return (target_str in event_str) or (target_str in deobf_event_str)
         elif modifier == "startswith":
-            return event_str.startswith(target_str)
+            return event_str.startswith(target_str) or deobf_event_str.startswith(target_str)
         elif modifier == "endswith":
-            return event_str.endswith(target_str)
+            return event_str.endswith(target_str) or deobf_event_str.endswith(target_str)
         else:
-            return event_str == target_str
+            return (event_str == target_str) or (deobf_event_str == target_str)
 
     def _evaluate_block(self, block_def: Any, event: Dict[str, Any]) -> bool:
         # A block can be a dictionary of field: value or a list of dictionaries (OR of blocks)
@@ -64,7 +81,14 @@ class SigmaRule:
                 field_name = parts[0]
                 modifier = parts[1]
 
+            # Direct lookup or case-insensitive fallback
             event_val = event.get(field_name)
+            if event_val is None:
+                for k, v in event.items():
+                    if k.lower() == field_name.lower():
+                        event_val = v
+                        break
+
             if not self._match_field_value(event_val, target_val, modifier):
                 return False
 
