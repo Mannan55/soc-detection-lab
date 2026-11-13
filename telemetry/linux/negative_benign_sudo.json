@@ -22,5 +22,21 @@
     "target_user": "syslog",
     "command": "/bin/cat auth.log",
     "pwd": "/var/log"
+  },
+  {
+    "timestamp": "2026-11-13T08:30:15.000Z",
+    "message": "sudo: operator : TTY=pts/0 ; PWD=/var/log ; USER=root ; COMMAND=/usr/bin/find /var/log -type f -name \"*.gz\" -delete",
+    "user": "operator",
+    "target_user": "root",
+    "command": "/usr/bin/find /var/log -type f -name \"*.gz\" -delete",
+    "pwd": "/var/log"
+  },
+  {
+    "timestamp": "2026-11-13T08:35:40.000Z",
+    "message": "sudo: admin : TTY=pts/1 ; PWD=/etc ; USER=root ; COMMAND=/usr/bin/vim /etc/hosts",
+    "user": "admin",
+    "target_user": "root",
+    "command": "/usr/bin/vim /etc/hosts",
+    "pwd": "/etc"
   }
 ]

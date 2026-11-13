@@ -20,14 +20,17 @@ detection:
     TargetUser: 'root'
   selection_commands:
     Command|contains:
-      - '/find '
-      - '/vim '
-      - '/less '
-      - '/awk '
-      - '/bash -p'
-      - '/sh -p'
       - 'exec /bin/sh'
       - 'exec /bin/bash'
+      - 'exec sh'
+      - 'exec bash'
+      - '/bin/bash -p'
+      - '/bin/sh -p'
+      - 'vim -c :!'
+      - "vim -c ':!'"
+      - 'less /etc/shadow'
+      - 'awk BEGIN {system('
+      - "awk 'BEGIN {system"
   filter_pkg_mgr:
     Command|startswith:
       - '/usr/bin/apt'
@@ -35,5 +38,5 @@ detection:
       - '/usr/bin/systemctl'
   condition: all of selection* and not filter_pkg_mgr
 falsepositives:
-  - Legitimate administrator running find or text editors under root for maintenance.
+  - Legitimate administrator performing rescue or maintenance operations.
   - Sudoers configuration should restrict interactive binary execution without password.

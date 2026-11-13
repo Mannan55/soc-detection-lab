@@ -31,5 +31,27 @@
       "TargetUserName": "SYSTEM",
       "NewProcessId": "3412"
     }
+  },
+  {
+    "EventID": 4688,
+    "TimeCreated": "2026-11-13T09:18:22.000Z",
+    "EventData": {
+      "NewProcessName": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+      "CommandLine": "powershell.exe -Command Out-File -FilePath report.txt -encoding utf8",
+      "ParentProcessName": "C:\\Windows\\System32\\cmd.exe",
+      "TargetUserName": "analyst",
+      "NewProcessId": "4108"
+    }
+  },
+  {
+    "EventID": 4688,
+    "TimeCreated": "2026-11-13T09:25:30.000Z",
+    "EventData": {
+      "NewProcessName": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+      "CommandLine": "powershell.exe -File C:\\Tools\\encryption_benchmark.ps1 -iterations 1000",
+      "ParentProcessName": "C:\\Windows\\explorer.exe",
+      "TargetUserName": "developer",
+      "NewProcessId": "5032"
+    }
   }
 ]

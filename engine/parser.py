@@ -73,3 +73,4 @@ def normalize_linux_sudo_event(raw_event: Dict[str, Any]) -> Dict[str, Any]:
         "Message": message,
         "timestamp": raw_event.get("timestamp", "")
     }
+

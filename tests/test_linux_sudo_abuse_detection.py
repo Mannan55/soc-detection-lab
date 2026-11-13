@@ -45,3 +45,4 @@ def test_negative_telemetry_produces_zero_false_positives(sudo_rule):
         normalized = normalize_linux_sudo_event(raw_ev)
         matched, alert = sudo_rule.evaluate(normalized)
         assert matched is False, f"False positive triggered on benign event: {normalized['Command']}"
+

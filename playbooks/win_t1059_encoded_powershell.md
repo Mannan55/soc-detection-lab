@@ -70,3 +70,4 @@ If initial triage indicates unapproved or hostile execution:
 ## 5. False Positive Tuning
 
 * **Known Admin Tools:** If genuine enterprise tools utilize encoded PowerShell commands, create targeted exclusion filters specifying both the full parent binary path and the exact signing certificate.
+

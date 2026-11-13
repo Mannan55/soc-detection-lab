@@ -31,3 +31,4 @@ def test_zero_em_dashes_in_soc_lab():
                     violations.append(f"Could not read {rel_path}: {e}")
 
     assert len(violations) == 0, "U+2014 em dash detected in files:\n" + "\n".join(violations)
+

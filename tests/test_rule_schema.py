@@ -38,3 +38,4 @@ def test_sigma_rule_schema(rule_path):
     assert "logsource" in data, f"Missing 'logsource' in {rule_path}"
     assert "detection" in data, f"Missing 'detection' in {rule_path}"
     assert "condition" in data["detection"], f"Missing 'condition' in detection block of {rule_path}"
+

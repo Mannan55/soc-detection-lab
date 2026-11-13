@@ -68,18 +68,26 @@ This laboratory provides an end-to-end **Detection-as-Code (DaC)** workflow:
 ## 4. Detection Scenarios Detail
 
 ### Scenario 1: Windows Suspicious Encoded PowerShell Process Execution
-* **Threat Context:** Adversaries leverage `powershell.exe` with base64 encoded parameters (`-enc`, `-encodedcommand`) and hidden window flags (`-w hidden`, `-nop`) to evade command-line auditing and execute in-memory download cradles.
-* **Positive Fixture:** Process creation events containing obfuscated payload strings and hidden window arguments.
-* **Negative Fixture (False Positive Control):** Administrative tasks executing standard scripts (`-File C:\Scripts\backup.ps1`) or enterprise deployment tools (`SystemCenter`), ensuring zero alert noise.
+* **Threat Context:** Adversaries leverage `powershell.exe` with base64 encoded parameters (`-enc`, `-encodedcommand`, `/e`) and hidden window flags (`-w hidden`, `-nop`) to evade command-line auditing and execute in-memory download cradles.
+* **Positive Fixtures:** Process creation events containing obfuscated payload strings, forward slash flag variants, and mixed-case argument obfuscation.
+* **Negative Fixtures (False Positive Controls):** Administrative tasks executing standard scripts (`backup.ps1`), tools with benign flags (`-encoding utf8`), or deployment agents (`SystemCenter`), ensuring zero alert noise.
 
 ### Scenario 2: Linux Sudo Privilege Abuse via Suspicious Binaries
-* **Threat Context:** Unprivileged users or compromised service accounts exploiting sudo permissions on standard binaries (`find`, `vim`, `less`, `awk`, `bash -p`) to escape constrained shells and execute root sessions without re-authenticating (GTFOBins pattern).
-* **Positive Fixture:** Sudo execution logs running shell escapes (`find . -exec /bin/sh -p \;` or `vim /etc/shadow`).
-* **Negative Fixture (False Positive Control):** Standard administrative commands (`sudo systemctl restart nginx`, `sudo apt update`) and non-root targets.
+* **Threat Context:** Unprivileged users or compromised accounts exploiting sudo permissions on standard binaries (`find`, `vim`, `less`, `awk`, `bash -p`) to escape constrained shells and execute root sessions without re-authenticating (GTFOBins pattern).
+* **Positive Fixtures:** Sudo execution logs running shell breakout sequences (`find . -exec /bin/sh -p \;`, `vim -c :!/bin/sh`, `less /etc/shadow`).
+* **Negative Fixtures (False Positive Controls):** Standard administrative commands (`sudo systemctl restart nginx`, `sudo apt update`), benign directory cleanups (`find /var/log -name "*.gz" -delete`), and non-root targets.
 
 ---
 
-## 5. Verification and Test Suite
+## 5. Scope Boundary and Real-World Detection Accuracy
+
+> **Notice on Detection Efficacy:**  
+> The 100% true positive rate and 0% false positive rate documented in this laboratory reflect deterministic unit test verification against curated synthetic test fixtures.  
+> In live enterprise environments with diverse third-party administrative software, detection rules require ongoing baseline tuning, environment-specific whitelisting, and correlation against host context to manage real-world noise. For engine specifications and limitations, consult the [Sigma Specification Document](docs/SIGMA_SPECIFICATION.md).
+
+---
+
+## 6. Verification and Test Suite
 
 The laboratory includes an automated test harness ensuring:
 * **True Positive Rate:** 100% of malicious attack samples trigger alerts with matching severity and MITRE tags.
@@ -99,13 +107,15 @@ pytest -v
 
 ---
 
-## 6. Directory Structure
+## 7. Directory Structure
 
 ```text
 soc-detection-lab/
 ├── .github/
 │   └── workflows/
 │       └── ci.yml             # Automated CI pipeline
+├── docs/
+│   └── SIGMA_SPECIFICATION.md # Supported Sigma engine specification
 ├── engine/
 │   ├── __init__.py
 │   ├── parser.py              # Log normalizer for Windows and Linux telemetry
@@ -124,6 +134,6 @@ soc-detection-lab/
 
 ---
 
-## 7. License
+## 8. License
 
 This project is licensed under the [MIT License](LICENSE).

@@ -17,10 +17,34 @@
   },
   {
     "timestamp": "2026-11-13T11:23:05.000Z",
-    "message": "sudo: intern : TTY=pts/2 ; PWD=/opt/app ; USER=root ; COMMAND=/usr/bin/vim /etc/shadow",
+    "message": "sudo: intern : TTY=pts/2 ; PWD=/opt/app ; USER=root ; COMMAND=/usr/bin/vim -c :!/bin/sh",
     "user": "intern",
     "target_user": "root",
-    "command": "/usr/bin/vim /etc/shadow",
+    "command": "/usr/bin/vim -c :!/bin/sh",
     "pwd": "/opt/app"
+  },
+  {
+    "timestamp": "2026-11-13T11:25:30.000Z",
+    "message": "sudo: service_account : TTY=pts/3 ; PWD=/root ; USER=root ; COMMAND=find /var -exec sh -i \\;",
+    "user": "service_account",
+    "target_user": "root",
+    "command": "find /var -exec sh -i \\;",
+    "pwd": "/root"
+  },
+  {
+    "timestamp": "2026-11-13T11:28:10.000Z",
+    "message": "sudo: compromised_dev : TTY=pts/1 ; PWD=/home/dev ; USER=root ; COMMAND=/usr/bin/awk 'BEGIN {system(\"/bin/sh\")}'",
+    "user": "compromised_dev",
+    "target_user": "root",
+    "command": "/usr/bin/awk 'BEGIN {system(\"/bin/sh\")}'",
+    "pwd": "/home/dev"
+  },
+  {
+    "timestamp": "2026-11-13T11:30:00.000Z",
+    "message": "sudo: intruder : TTY=pts/0 ; PWD=/tmp ; USER=root ; COMMAND=/usr/bin/less /etc/shadow",
+    "user": "intruder",
+    "target_user": "root",
+    "command": "/usr/bin/less /etc/shadow",
+    "pwd": "/tmp"
   }
 ]

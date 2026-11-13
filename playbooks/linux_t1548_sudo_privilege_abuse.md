@@ -67,3 +67,4 @@ When an alert triggers, execute the following triage steps within 15 minutes:
 ## 5. False Positive Tuning
 
 * If developers legitimately require text editors on development machines, restrict root editing to tools that do not permit shell escapes (such as `sudoedit`), which creates a safe temporary file copy rather than running the editor as root.
+

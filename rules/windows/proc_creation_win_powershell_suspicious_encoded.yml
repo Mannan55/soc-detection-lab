@@ -21,22 +21,31 @@ detection:
     Image|endswith:
       - '\powershell.exe'
       - '\pwsh.exe'
+      - 'powershell.exe'
+      - 'pwsh.exe'
   selection_encoded:
     CommandLine|contains:
       - ' -enc '
       - ' -encodedcommand '
       - ' -e '
+      - ' /enc '
+      - ' /encodedcommand '
+      - ' /e '
   selection_flags:
     CommandLine|contains:
       - '-w hidden'
+      - '/w hidden'
       - '-windowstyle hidden'
+      - '/windowstyle hidden'
       - '-nop'
+      - '/nop'
       - '-noprofile'
+      - '/noprofile'
   filter_admin:
     CommandLine|contains:
       - 'C:\Program Files\SystemCenter'
       - 'Microsoft.ActiveDirectory'
   condition: all of selection* and not filter_admin
 falsepositives:
-  - Rare enterprise deployment scripts utilizing base64 parameters.
+  - Enterprise software deployment tools utilizing base64 parameters.
   - Administrative management scripts should be whitelisted with explicit paths.
