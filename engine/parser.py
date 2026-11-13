@@ -33,6 +33,65 @@ def normalize_windows_process_creation(raw_event: Dict[str, Any]) -> Dict[str, A
     }
 
 
+def normalize_windows_logon_failure(raw_event: Dict[str, Any]) -> Dict[str, Any]:
+    """
+    Normalizes Windows Security Event 4625 failed logon attempts.
+    Extracts authentication failure parameters, logon types, and status codes.
+    """
+    event_data = raw_event.get("EventData", raw_event)
+
+    target_user = (
+        event_data.get("TargetUserName")
+        or event_data.get("TargetUser")
+        or event_data.get("User")
+        or ""
+    )
+    workstation = (
+        event_data.get("WorkstationName")
+        or event_data.get("Workstation")
+        or ""
+    )
+    ip_address = (
+        event_data.get("IpAddress")
+        or event_data.get("SourceIp")
+        or event_data.get("IpPort")
+        or ""
+    )
+    logon_type = str(
+        event_data.get("LogonType")
+        or raw_event.get("LogonType")
+        or ""
+    )
+    status = (
+        event_data.get("Status")
+        or raw_event.get("Status")
+        or ""
+    )
+    sub_status = (
+        event_data.get("SubStatus")
+        or raw_event.get("SubStatus")
+        or ""
+    )
+    failure_reason = (
+        event_data.get("FailureReason")
+        or event_data.get("StatusDescription")
+        or ""
+    )
+
+    return {
+        "event_id": str(raw_event.get("EventID", 4625)),
+        "channel": "Security",
+        "TargetUserName": target_user,
+        "WorkstationName": workstation,
+        "IpAddress": ip_address,
+        "LogonType": logon_type,
+        "Status": status,
+        "SubStatus": sub_status,
+        "FailureReason": failure_reason,
+        "timestamp": raw_event.get("TimeCreated", "")
+    }
+
+
 def normalize_linux_sudo_event(raw_event: Dict[str, Any]) -> Dict[str, Any]:
     """
     Normalizes Linux sudo execution events from /var/log/auth.log or syslog.

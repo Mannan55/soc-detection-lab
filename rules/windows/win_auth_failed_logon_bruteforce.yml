@@ -1,0 +1,37 @@
+title: Potential Windows Authentication Brute-Force or Password Spray
+id: d7e8b91a-4c2f-4a3b-9801-6f23d5a49811
+status: test
+description: Detects multiple failed logon attempts (Event ID 4625) with known brute-force or credential guessing sub-status codes (0xC000006A for bad password or 0xC0000064 for unknown user) across network or RDP logon types, filtering benign machine accounts.
+references:
+  - https://attack.mitre.org/techniques/T1110/
+  - https://attack.mitre.org/techniques/T1110/001/
+  - https://attack.mitre.org/techniques/T1110/003/
+author: Mannan Shah
+date: 2026-11-13
+modified: 2026-11-13
+tags:
+  - attack.credential_access
+  - attack.t1110
+  - attack.t1110.001
+  - attack.t1110.003
+logsource:
+  product: windows
+  service: security
+detection:
+  selection:
+    event_id: "4625"
+    SubStatus:
+      - "0xc000006a"
+      - "0xc0000064"
+    LogonType:
+      - "3"
+      - "10"
+  filter_machine_account:
+    TargetUserName|endswith: "$"
+  filter_anonymous:
+    TargetUserName: "ANONYMOUS LOGON"
+  condition: selection and not 1 of filter*
+falsepositives:
+  - Misconfigured service accounts with expired credentials
+  - Bulk network scans conducted by authorized vulnerability scanners
+level: high

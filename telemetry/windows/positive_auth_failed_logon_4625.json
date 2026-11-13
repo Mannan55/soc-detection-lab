@@ -1,0 +1,54 @@
+[
+  {
+    "EventID": 4625,
+    "TimeCreated": "2026-11-13T11:00:15.000Z",
+    "EventData": {
+      "TargetUserName": "administrator",
+      "WorkstationName": "ATTACK-BOX",
+      "IpAddress": "192.168.1.150",
+      "LogonType": "10",
+      "Status": "0xC000006D",
+      "SubStatus": "0xC000006A",
+      "FailureReason": "Unknown user name or bad password."
+    }
+  },
+  {
+    "EventID": 4625,
+    "TimeCreated": "2026-11-13T11:00:22.000Z",
+    "EventData": {
+      "TargetUserName": "admin",
+      "WorkstationName": "ATTACK-BOX",
+      "IpAddress": "192.168.1.150",
+      "LogonType": "10",
+      "Status": "0xC000006D",
+      "SubStatus": "0xC0000064",
+      "FailureReason": "The specified user does not exist."
+    }
+  },
+  {
+    "EventID": 4625,
+    "TimeCreated": "2026-11-13T11:01:05.000Z",
+    "EventData": {
+      "TargetUserName": "sqlservice",
+      "WorkstationName": "EXTERNAL-HOST",
+      "IpAddress": "10.0.4.88",
+      "LogonType": "3",
+      "Status": "0xC000006D",
+      "SubStatus": "0xC000006A",
+      "FailureReason": "Unknown user name or bad password."
+    }
+  },
+  {
+    "EventID": 4625,
+    "TimeCreated": "2026-11-13T11:02:14.000Z",
+    "EventData": {
+      "TargetUserName": "jsmith",
+      "WorkstationName": "CAL-SCAN-01",
+      "IpAddress": "172.16.10.45",
+      "LogonType": "3",
+      "Status": "0xC000006D",
+      "SubStatus": "0xC000006A",
+      "FailureReason": "Unknown user name or bad password."
+    }
+  }
+]
