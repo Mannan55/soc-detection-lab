@@ -1,0 +1,42 @@
+title: Suspicious Encoded PowerShell Process Execution
+id: a8b1c2d3-e4f5-4678-90ab-cdef12345678
+status: test
+description: Detects execution of PowerShell with encoded command arguments and hidden window parameters often associated with obfuscated script cradles or lateral movement.
+references:
+  - https://attack.mitre.org/techniques/T1059/001/
+  - https://attack.mitre.org/techniques/T1027/
+author: Mannan Shah (@Mannan55)
+date: 2026/11/13
+level: high
+tags:
+  - attack.execution
+  - attack.t1059.001
+  - attack.defense_evasion
+  - attack.t1027
+logsource:
+  category: process_creation
+  product: windows
+detection:
+  selection_img:
+    Image|endswith:
+      - '\powershell.exe'
+      - '\pwsh.exe'
+  selection_encoded:
+    CommandLine|contains:
+      - ' -enc '
+      - ' -encodedcommand '
+      - ' -e '
+  selection_flags:
+    CommandLine|contains:
+      - '-w hidden'
+      - '-windowstyle hidden'
+      - '-nop'
+      - '-noprofile'
+  filter_admin:
+    CommandLine|contains:
+      - 'C:\Program Files\SystemCenter'
+      - 'Microsoft.ActiveDirectory'
+  condition: all of selection* and not filter_admin
+falsepositives:
+  - Rare enterprise deployment scripts utilizing base64 parameters.
+  - Administrative management scripts should be whitelisted with explicit paths.

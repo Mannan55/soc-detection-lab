@@ -1,0 +1,35 @@
+[
+  {
+    "EventID": 4688,
+    "TimeCreated": "2026-11-13T09:00:10.000Z",
+    "EventData": {
+      "NewProcessName": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+      "CommandLine": "powershell.exe -File C:\\Scripts\\scheduled_backup.ps1",
+      "ParentProcessName": "C:\\Windows\\System32\\taskeng.exe",
+      "TargetUserName": "SYSTEM",
+      "NewProcessId": "1840"
+    }
+  },
+  {
+    "EventID": 4688,
+    "TimeCreated": "2026-11-13T09:05:44.000Z",
+    "EventData": {
+      "NewProcessName": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+      "CommandLine": "powershell.exe -Command Get-Service -Name W32Time",
+      "ParentProcessName": "C:\\Windows\\System32\\cmd.exe",
+      "TargetUserName": "admin_mannan",
+      "NewProcessId": "2296"
+    }
+  },
+  {
+    "EventID": 4688,
+    "TimeCreated": "2026-11-13T09:12:00.000Z",
+    "EventData": {
+      "NewProcessName": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+      "CommandLine": "powershell.exe -nop -w hidden -enc JABkAGEAdABhACAAPQAgACcAdABlAHMAdAAnAA== -File C:\\Program Files\\SystemCenter\\agent.ps1",
+      "ParentProcessName": "C:\\Program Files\\SystemCenter\\monitoring.exe",
+      "TargetUserName": "SYSTEM",
+      "NewProcessId": "3412"
+    }
+  }
+]

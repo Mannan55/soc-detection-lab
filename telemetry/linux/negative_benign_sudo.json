@@ -1,0 +1,26 @@
+[
+  {
+    "timestamp": "2026-11-13T08:15:00.000Z",
+    "message": "sudo: sysadmin : TTY=pts/0 ; PWD=/etc/nginx ; USER=root ; COMMAND=/usr/bin/systemctl restart nginx",
+    "user": "sysadmin",
+    "target_user": "root",
+    "command": "/usr/bin/systemctl restart nginx",
+    "pwd": "/etc/nginx"
+  },
+  {
+    "timestamp": "2026-11-13T08:20:12.000Z",
+    "message": "sudo: engineer : TTY=pts/1 ; PWD=/root ; USER=root ; COMMAND=/usr/bin/apt update",
+    "user": "engineer",
+    "target_user": "root",
+    "command": "/usr/bin/apt update",
+    "pwd": "/root"
+  },
+  {
+    "timestamp": "2026-11-13T08:25:30.000Z",
+    "message": "sudo: auditor : TTY=pts/0 ; PWD=/var/log ; USER=syslog ; COMMAND=/bin/cat auth.log",
+    "user": "auditor",
+    "target_user": "syslog",
+    "command": "/bin/cat auth.log",
+    "pwd": "/var/log"
+  }
+]

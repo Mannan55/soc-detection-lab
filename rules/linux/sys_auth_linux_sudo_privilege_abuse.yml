@@ -1,0 +1,39 @@
+title: Linux Sudo Privilege Abuse via Suspicious Binaries
+id: b9c2d3e4-f5a6-4789-91bc-def012345679
+status: test
+description: Detects execution of commands via sudo using binaries known to facilitate privilege escalation, interactive shell escapes, or arbitrary file reads (GTFOBins pattern).
+references:
+  - https://attack.mitre.org/techniques/T1548/003/
+  - https://gtfobins.github.io/
+author: Mannan Shah (@Mannan55)
+date: 2026/11/13
+level: high
+tags:
+  - attack.privilege_escalation
+  - attack.t1548.003
+  - attack.defense_evasion
+logsource:
+  category: auth
+  product: linux
+detection:
+  selection_target:
+    TargetUser: 'root'
+  selection_commands:
+    Command|contains:
+      - '/find '
+      - '/vim '
+      - '/less '
+      - '/awk '
+      - '/bash -p'
+      - '/sh -p'
+      - 'exec /bin/sh'
+      - 'exec /bin/bash'
+  filter_pkg_mgr:
+    Command|startswith:
+      - '/usr/bin/apt'
+      - '/usr/bin/yum'
+      - '/usr/bin/systemctl'
+  condition: all of selection* and not filter_pkg_mgr
+falsepositives:
+  - Legitimate administrator running find or text editors under root for maintenance.
+  - Sudoers configuration should restrict interactive binary execution without password.

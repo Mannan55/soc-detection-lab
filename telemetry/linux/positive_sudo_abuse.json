@@ -1,0 +1,26 @@
+[
+  {
+    "timestamp": "2026-11-13T11:20:15.000Z",
+    "message": "sudo: devops_user : TTY=pts/0 ; PWD=/home/devops_user ; USER=root ; COMMAND=/usr/bin/find . -exec /bin/sh -p \\;",
+    "user": "devops_user",
+    "target_user": "root",
+    "command": "/usr/bin/find . -exec /bin/sh -p \\;",
+    "pwd": "/home/devops_user"
+  },
+  {
+    "timestamp": "2026-11-13T11:21:40.000Z",
+    "message": "sudo: attacker : TTY=pts/1 ; PWD=/tmp ; USER=root ; COMMAND=/bin/bash -p",
+    "user": "attacker",
+    "target_user": "root",
+    "command": "/bin/bash -p",
+    "pwd": "/tmp"
+  },
+  {
+    "timestamp": "2026-11-13T11:23:05.000Z",
+    "message": "sudo: intern : TTY=pts/2 ; PWD=/opt/app ; USER=root ; COMMAND=/usr/bin/vim /etc/shadow",
+    "user": "intern",
+    "target_user": "root",
+    "command": "/usr/bin/vim /etc/shadow",
+    "pwd": "/opt/app"
+  }
+]
